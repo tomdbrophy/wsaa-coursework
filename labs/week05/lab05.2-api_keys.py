@@ -1,18 +1,17 @@
 import requests
 import urllib.parse
+from config import config as cfg
 
 target_url = 'https://www.wikipedia.org/'
 
-api_key = ''
+api_key = cfg['pdfkey']
 
 api_url = 'https://api.html2pdf.app/v1/generate'
-'''
-params = {'url':target_url, 'api_key':api_key}
+
+params = {'html':target_url, 'apiKey':api_key}
 parsed_params = urllib.parse.urlencode(params)
 request_url = api_url+'?'+parsed_params
-'''
-
-request_url = ''
+print(request_url)
 
 response = requests.get(request_url)
 print(response.status_code)
