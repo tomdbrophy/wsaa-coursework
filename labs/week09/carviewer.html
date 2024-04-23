@@ -21,7 +21,7 @@
                     <td>The Light Fantastic</td>
                     <td>Terry Pratchett</td>
                     <td>12</td>
-                    <td><button>Update</button></td>
+                    <td><button onclick="showUpdate(this)">Update</button></td>
                     <td><button>Delete</button></td>
                 </tr>
                 <tr>
@@ -29,14 +29,14 @@
                     <td>The Colour of Magic</td>
                     <td>Terry Pratchett</td>
                     <td>22</td>
-                    <td><button>Update</button></td>
+                    <td><button onclick="showUpdate(this)">Update</button></td>
                     <td><button>Delete</button></td>
                 </tr><tr>
                     <td>2</td>
                     <td>Guards, Guards</td>
                     <td>Terry Pratchett</td>
                     <td>11</td>
-                    <td><button>Update</button></td>
+                    <td><button onclick="showUpdate(this)">Update</button></td>
                     <td><button>Delete</button></td>
                 </tr>
             </table>
@@ -57,7 +57,7 @@
                 <option value="other">out of print</option>
             </select><br/>
         </div>
-        <span><button id="button-doCreate">Create</button></span>
+        <span><button id="button-doCreate" onclick="doCreate()">Create</button></span>
         <span><button id="button-doUpdate" style="display:none">Update</button></span>
         </div>
         <script>
@@ -65,6 +65,53 @@
                 document.getElementById('button-showCreate').style.display='none'
                 document.getElementById('bookTable').style.display='none'
                 document.getElementById('createUpdateForm').style.display='block'
+                document.getElementById('createLabel').style.display='inline'
+                document.getElementById('updateLabel').style.display='none'
+                document.getElementById('button-doCreate').style.display='block'
+                document.getElementById('button-doUpdate').style.display='none'
+            }
+            function showUpdate(buttonElement){
+                document.getElementById('button-showCreate').style.display='none'
+                document.getElementById('bookTable').style.display='none'
+                document.getElementById('createUpdateForm').style.display='block'
+                document.getElementById('createLabel').style.display='none'
+                document.getElementById('updateLabel').style.display='inline'
+                document.getElementById('button-doCreate').style.display='none'
+                document.getElementById('button-doUpdate').style.display='block'
+            }
+            function doCreate(){
+
+                book = getBookFromForm()
+                console.log(book)
+
+                showViewAll()
+                clearForm()
+                
+            }
+            function showViewAll(){
+                document.getElementById('button-showCreate').style.display='block'
+                document.getElementById('bookTable').style.display='block'
+                document.getElementById('createUpdateForm').style.display='none'
+                document.getElementById('createLabel').style.display='inline'
+                document.getElementById('updateLabel').style.display='none'
+                document.getElementById('button-doCreate').style.display='block'
+                document.getElementById('button-doUpdate').style.display='none'  
+            }
+            function clearForm(){
+                var form=document.getElementById('createUpdateForm')
+                form.querySelector('input[name="id"]').disabled=false
+                form.querySelector('input[name="id"]').value=''
+                form.querySelector('input[name="title"]').value=''
+                form.querySelector('input[name="author"]').value=''
+                form.querySelector('input[name="price"]').value=''
+            }
+            function getBookFromForm(){
+                var form = document.getElementById('createUpdateForm')
+                var book = {}
+                book.id = form.querySelector('input[name="id"]').value
+                book.title = form.querySelector('input[name="title"]').value
+                book.author = form.querySelector('input[name="author"]').value
+                book.price = form.querySelector('input[name="price"]').value
             }
         </script>
     </body>
